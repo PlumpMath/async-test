@@ -54,8 +54,6 @@
     (go
      (loop [msg (<! c)
             usermap #{}]
-       (println "here3! Size of usermap: " (count usermap) )
-       (println "set of maps: " usermap)
        (let [newmap (handle-message msg usermap)]
          (recur (<! c) newmap))))
     c))
@@ -66,7 +64,6 @@
    (let [name (.readLine reader)]
      (>! c {:type :register :writer writer :name name})
      (loop []
-       (println "here2!")
        (let [cmd (.readLine reader)]
          (if (or (nil? cmd) (= "quit" cmd))
            (do
@@ -88,6 +85,5 @@
         c  (start-server-process)]
     (println "Listening on " port " for connections.")
     (loop [s (.accept ss)]
-      (println "connection from " s)
       (start-user-process s c)
       (recur (.accept ss)))))
