@@ -82,8 +82,7 @@
         writer (java.io.PrintWriter. (java.io.BufferedWriter. (java.io.OutputStreamWriter. (.getOutputStream s))))]
     (process-user-command s writer reader c)))
 
-;; main loop
-(defn server-start []
+(defn -main []
   (let [port 2001
         ss (java.net.ServerSocket. port)
         c  (start-server-process)]
