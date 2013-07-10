@@ -18,8 +18,8 @@
 (defmethod handle-message :broadcast [msg usermap]
   (let [body (:body msg)]
     (println "handling broadcast msg: " body)
-    (doseq [m usermap]
-      (util/send-to-user (:writer m) (str body "\n")))
+    (thread (doseq [m usermap]
+      (util/send-to-user (:writer m) (str body "\n"))))
     usermap))
 
 (defmethod handle-message :private [msg usermap]
